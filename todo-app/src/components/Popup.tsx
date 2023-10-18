@@ -73,15 +73,20 @@ const TextContainer = styled.div`
 
 const TextWrapper = styled.div`
   text-align: left;
+  background: #fff1e1;
+  padding: 0 8px;
+  margin-top: 12px;
 `;
 
 const Title = styled.h3`
   font-size: 24px;
   margin-bottom: 4px;
+  text-align: center;
 `;
 
 const SmallText = styled.p`
   font-size: 16px;
+  text-align: center;
 `;
 
 const Text = styled.p`
@@ -99,7 +104,22 @@ export const DetailsPopup: React.FC<Props> = ({
   clickHandlerClose,
   todo,
 }) => {
-  const date = todo.attributes.createdAt?.type;
+  const created = todo.attributes.createdAt;
+  const deadline = todo.attributes.deadline;
+
+  let d = new Date(created);
+  let formatCreatedAt = d.toLocaleDateString("fi-FI", {
+    month: "2-digit",
+    day: "2-digit",
+    year: "numeric",
+  });
+
+  let d2 = new Date(deadline);
+  let formatDeadline = d2.toLocaleDateString("fi-FI", {
+    month: "2-digit",
+    day: "2-digit",
+    year: "numeric",
+  });
 
   return (
     <Container open={isOpen}>
@@ -108,14 +128,24 @@ export const DetailsPopup: React.FC<Props> = ({
         <PopupX onClick={clickHandlerClose}>
           <CloseIcon />
         </PopupX>
-        <TextContainer>
-          <Title>{todo.attributes.name}</Title>
-          <SmallText>Added: {todo.attributes.createdAt}</SmallText>
-          <TextWrapper>
-            <Text>{todo.attributes.description}</Text>
-            <Text>Deadline: {todo.attributes.deadline}</Text>
-          </TextWrapper>
-        </TextContainer>
+        <>
+          <TextContainer>
+            <Title>{todo.attributes.name}</Title>
+            <SmallText>Added: {formatCreatedAt}</SmallText>
+            <TextWrapper>
+              <Text>{todo.attributes.description}</Text>
+
+              <Text>
+                Deadline:{" "}
+                {todo.attributes.deadline ? (
+                  <span>{formatDeadline}</span>
+                ) : (
+                  <span>-</span>
+                )}
+              </Text>
+            </TextWrapper>
+          </TextContainer>
+        </>
       </Popup>
     </Container>
   );

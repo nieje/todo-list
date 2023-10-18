@@ -5,7 +5,7 @@ import styled from "styled-components";
 const AddTodoContainer = styled.div`
   margin-top: 4px;
   margin-bottom: 48px;
-  width: 500px;
+  width: 600px;
   display: flex;
   justify-content: space-evenly;
 `;

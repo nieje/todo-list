@@ -1,6 +1,6 @@
 "use client";
 
-import { HttpLink, SuspenseCache, ApolloLink } from "@apollo/client";
+import { HttpLink, ApolloLink } from "@apollo/client";
 import {
   NextSSRApolloClient,
   ApolloNextAppProvider,
@@ -26,9 +26,7 @@ function makeClient() {
         : httpLink,
   });
 }
-function makeSuspenseCache() {
-  return new SuspenseCache();
-}
+
 export function ApolloWrapper({ children }: React.PropsWithChildren) {
   return (
     <ApolloNextAppProvider

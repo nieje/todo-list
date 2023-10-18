@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Item = styled.div`
   padding: 12px;
-  margin-top: 9px;
+  margin-top: 16px;
   margin-bottom: 2px;
 
   color: #3a3a3a;
@@ -77,7 +77,6 @@ function TodoItem({
     <>
       <Item>
         <Text onClick={handlePopupClick}>{todo.attributes.name}</Text>
-
         <ButtonWrapper>
           <DefaultButton onClick={() => editTodoItem(todo)}>Edit</DefaultButton>
           <DeleteButton onClick={() => deleteTodoItem(todo)}>Del</DeleteButton>
